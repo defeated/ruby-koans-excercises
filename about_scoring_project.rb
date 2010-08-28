@@ -36,7 +36,7 @@ def score(dice)
   score = 0
   
   dice.sort!.each_with_index do |v, i|
-    if dice.select { |d| d == v }.size >= 3 then
+    if dice.count(v) >= 3 then
       
       if v == 1 then
         score += 1000
