@@ -14,11 +14,23 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
-  equal_sides = [a, b, c].uniq.size
-  return :equilateral if equal_sides == 1
-  return :isosceles if equal_sides == 2
-  return :scalene if equal_sides == 3
+
+  # "the sum of the lengths of any two sides must be
+  # greater than the length of the remaining side."
+  #
+  # => http://en.wikipedia.org/wiki/Triangle_inequality
+  #
+  # omg my maths are rusty
+
+  sides = [a, b, c].sort # sort shortest-to-longest
+  raise TriangleError if sides.any? { |s| s <= 0 }
+  raise TriangleError unless sides[0] + sides[1] > sides[2]
+
+  case sides.uniq.size
+    when 1; :equilateral
+    when 2; :isosceles
+    when 3; :scalene
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
