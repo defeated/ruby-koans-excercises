@@ -15,6 +15,10 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
+  equal_sides = [a, b, c].uniq.size
+  return :equilateral if equal_sides == 1
+  return :isosceles if equal_sides == 2
+  return :scalene if equal_sides == 3
 end
 
 # Error class used in part 2.  No need to change this code.
