@@ -29,8 +29,31 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 #
 # Your goal is to write the score method.
 
+# first attempt.
+# there should be a better way to do this,
+# definitely some code smells inside:
 def score(dice)
-  # You need to write this method
+  score = 0
+  
+  dice.sort!.each_with_index do |v, i|
+    if dice.select { |d| d == v }.size >= 3 then
+      
+      if v == 1 then
+        score += 1000
+      else
+        score += v * 100
+      end
+      
+      2.times { dice.delete_at i }
+      
+    elsif v == 1 then
+      score += 100
+    elsif v == 5 then
+      score += 50
+    end
+  end
+  
+  score
 end
 
 class AboutScoringAssignment < EdgeCase::Koan
